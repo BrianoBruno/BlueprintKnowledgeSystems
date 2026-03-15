@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Primary SEO -->
+  <title>Blueprint Knowledge Systems | Software Consulting & Engineering</title>
+  <meta name="description" content="Blueprint Knowledge Systems is a premier software consulting firm specializing in architecture design, full-stack engineering, cloud infrastructure, and digital transformation for modern enterprises." />
+  <meta name="keywords" content="software consulting, software architecture, cloud infrastructure, digital transformation, full-stack engineering, enterprise software, technology consulting" />
+  <meta name="author" content="Blueprint Knowledge Systems" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://blueprintknowledgesystems.com/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://blueprintknowledgesystems.com/" />
+  <meta property="og:title" content="Blueprint Knowledge Systems | Software Consulting & Engineering" />
+  <meta property="og:description" content="We architect your digital future. Expert software consulting in architecture, engineering, cloud, and AI-driven solutions." />
+  <meta property="og:image" content="https://blueprintknowledgesystems.com/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blueprint Knowledge Systems | Software Consulting" />
+  <meta name="twitter:description" content="We architect your digital future. Expert software consulting in architecture, engineering, cloud, and AI-driven solutions." />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Blueprint Knowledge Systems",
+    "description": "Software consulting firm specializing in architecture design, full-stack engineering, cloud infrastructure, and digital transformation.",
+    "url": "https://blueprintknowledgesystems.com",
+    "telephone": "+1-800-BKS-TECH",
+    "email": "contact@blueprintknowledgesystems.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    },
+    "sameAs": [
+      "https://linkedin.com/company/blueprintknowledgesystems",
+      "https://github.com/blueprintknowledgesystems"
+    ],
+    "serviceType": ["Software Architecture", "Cloud Consulting", "Digital Transformation", "AI Integration"]
+  }
+  </script>
+
+  <style>
+    /* ===========================
+       DESIGN TOKENS
+    =========================== */
+    :root {
+      --bp-navy:      #03142E;
+      --bp-blue:      #0A2A5E;
+      --bp-mid:       #0D3B8C;
+      --bp-bright:    #1565C0;
+      --bp-cyan:      #29B6F6;
+      --bp-cyan-dim:  rgba(41, 182, 246, 0.18);
+      --bp-cyan-line: rgba(41, 182, 246, 0.35);
+      --bp-white:     #E8F4FD;
+      --bp-muted:     rgba(232, 244, 253, 0.6);
+      --bp-grid:      rgba(41, 182, 246, 0.08);
+      --transition:   0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --radius:       4px;
+    }
+
+    /* ===========================
+       RESET & BASE
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bp-navy);
+      color: var(--bp-white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    ::selection { background: var(--bp-cyan); color: var(--bp-navy); }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===========================
+       BLUEPRINT GRID BACKGROUND
+    =========================== */
+    .bp-grid-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(var(--bp-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridDrift 40s linear infinite;
+    }
+
+    .bp-grid-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(41,182,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(41,182,246,0.03) 1px, transparent 1px);
+      background-size: 12px 12px;
+    }
+
+    @keyframes gridDrift {
+      0%   { background-position: 0 0, 0 0; }
+      100% { background-position: 60px 60px, 60px 60px; }
+    }
+
+    /* ===========================
+       CORNER MARKS (blueprint)
+    =========================== */
+    .corner-mark {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-color: var(--bp-cyan-line);
+      border-style: solid;
+      opacity: 0.6;
+    }
+    .corner-mark.tl { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
+    .corner-mark.tr { top: 16px; right: 16px; border-width: 2px 2px 0 0; }
+    .corner-mark.bl { bottom: 16px; left: 16px; border-width: 0 0 2px 2px; }
+    .corner-mark.br { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: rgba(3, 20, 46, 0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--bp-cyan-line);
+      transition: var(--transition);
+    }
+
+    nav.scrolled {
+      height: 60px;
+      background: rgba(3, 20, 46, 0.97);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-logo-icon {
+      width: 38px;
+      height: 38px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-icon svg { width: 100%; height: 100%; }
+
+    .nav-logo-text { color: var(--bp-white); }
+    .nav-logo-text span { color: var(--bp-cyan); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--bp-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--bp-cyan);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--bp-cyan); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      padding: 9px 22px;
+      border: 1px solid var(--bp-cyan);
+      color: var(--bp-cyan) !important;
+      border-radius: var(--radius);
+      font-size: 0.8rem !important;
+      letter-spacing: 0.1em !important;
+      transition: background 0.2s, color 0.2s !important;
+    }
+    .nav-cta:hover {
+      background: var(--bp-cyan) !important;
+      color: var(--bp-navy) !important;
+    }
+    .nav-cta::after { display: none !important; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--bp-cyan);
+      transition: var(--transition);
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: rgba(3, 20, 46, 0.98);
+      border-bottom: 1px solid var(--bp-cyan-line);
+      padding: 24px 5%;
+      z-index: 999;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-size: 1rem;
+      color: var(--bp-muted);
+      letter-spacing: 0.06em;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bp-cyan-dim);
+    }
+
+    /* ===========================
+       SECTIONS SHARED
+    =========================== */
+    section { position: relative; z-index: 1; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bp-cyan);
+      margin-bottom: 18px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--bp-cyan);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--bp-white);
+    }
+
+    .section-title em {
+      font-style: normal;
+      color: var(--bp-cyan);
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--bp-muted);
+      max-width: 560px;
+      margin-top: 16px;
+      line-height: 1.75;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    /* ===========================
+       SCROLL ANIMATION CLASSES
+    =========================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
+    }
+
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
+    }
+
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.88);
+      transition: opacity 0.6s var(--transition), transform 0.6s var(--transition);
+    }
+
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+    .stagger-6 { transition-delay: 0.6s; }
+
+    /* ===========================
+       HERO
+    =========================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 5% 80px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bp-cyan-dim);
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bp-cyan);
+      margin-bottom: 28px;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--bp-cyan);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero-title .line { display: block; overflow: hidden; }
+
+    .hero-title .highlight {
+      color: var(--bp-cyan);
+      position: relative;
+    }
+
+    .hero-title .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--bp-cyan), transparent);
+      border-radius: 2px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--bp-muted);
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: var(--bp-cyan);
+      color: var(--bp-navy);
+      font-weight: 700;
+      font-size: 0.875rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: white;
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+      opacity: 0.15;
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(41,182,246,0.35); }
+    .btn-primary:hover::before { transform: translateX(0); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 28px;
+      border: 1px solid var(--bp-cyan-line);
+      color: var(--bp-white);
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.06em;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--bp-cyan);
+      color: var(--bp-cyan);
+      background: var(--bp-cyan-dim);
+      transform: translateY(-2px);
+    }
+
+    /* Blueprint drawing on right side */
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 1;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .blueprint-canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid var(--bp-cyan-line);
+    }
+
+    .stat-item { }
+
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--bp-cyan);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--bp-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--bp-muted);
+      text-transform: uppercase;
+    }
+
+    .scroll-indicator .mouse {
+      width: 22px;
+      height: 36px;
+      border: 1.5px solid var(--bp-cyan-line);
+      border-radius: 11px;
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+    }
+
+    .scroll-indicator .mouse-dot {
+      width: 3px;
+      height: 6px;
+      background: var(--bp-cyan);
+      border-radius: 2px;
+      animation: scrollDown 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0%   { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(10px); opacity: 0; }
+    }
+
+    /* ===========================
+       MARQUEE / TICKER
+    =========================== */
+    .marquee-wrapper {
+      overflow: hidden;
+      border-top: 1px solid var(--bp-cyan-line);
+      border-bottom: 1px solid var(--bp-cyan-line);
+      background: var(--bp-blue);
+      padding: 14px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: marquee 30s linear infinite;
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 32px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bp-muted);
+      white-space: nowrap;
+    }
+
+    .marquee-item::after {
+      content: '◆';
+      color: var(--bp-cyan);
+      font-size: 0.5rem;
+    }
+
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===========================
+       SERVICES
+    =========================== */
+    #services {
+      padding: 120px 0;
+    }
+
+    .services-header {
+      max-width: 1200px;
+      margin: 0 auto 72px;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .services-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: linear-gradient(135deg, rgba(13,59,140,0.3), rgba(3,20,46,0.6));
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 8px;
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: var(--transition);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--bp-cyan-dim), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .service-card:hover {
+      border-color: var(--bp-cyan);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(41,182,246,0.12);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-card-number {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--bp-cyan);
+      opacity: 0.6;
+      margin-bottom: 24px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--bp-cyan-dim);
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      transition: var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card:hover .service-icon {
+      background: var(--bp-cyan);
+      border-color: var(--bp-cyan);
+    }
+
+    .service-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--bp-cyan);
+      transition: stroke 0.3s;
+    }
+
+    .service-card:hover .service-icon svg { stroke: var(--bp-navy); }
+
+    .service-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--bp-white);
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card-desc {
+      font-size: 0.9rem;
+      color: var(--bp-muted);
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      background: var(--bp-cyan-dim);
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 2px;
+      color: var(--bp-cyan);
+    }
+
+    /* ===========================
+       ABOUT / APPROACH
+    =========================== */
+    #about {
+      padding: 120px 0;
+      background: linear-gradient(180deg, transparent, rgba(13,59,140,0.12), transparent);
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-diagram {
+      position: relative;
+    }
+
+    .about-diagram-box {
+      background: rgba(13, 59, 140, 0.2);
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 8px;
+      padding: 32px;
+      position: relative;
+    }
+
+    .diagram-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--bp-cyan);
+      margin-bottom: 24px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .diagram-layers {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .diagram-layer {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      transition: var(--transition);
+    }
+
+    .diagram-layer:hover {
+      background: var(--bp-cyan-dim);
+      border-color: var(--bp-cyan-line);
+    }
+
+    .diagram-layer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .layer-bar {
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--bp-cyan), rgba(41,182,246,0.25));
+      flex-shrink: 0;
+      transition: width 0.6s ease;
+      width: 0;
+    }
+
+    .layer-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--bp-white);
+    }
+
+    .layer-pct {
+      font-size: 0.72rem;
+      color: var(--bp-cyan);
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .about-content .values-list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .about-content .values-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .check-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bp-cyan-dim);
+      border: 1px solid var(--bp-cyan-line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .check-icon::after {
+      content: '✓';
+      font-size: 0.65rem;
+      color: var(--bp-cyan);
+      font-weight: 700;
+    }
+
+    .value-text { font-size: 0.95rem; color: var(--bp-muted); line-height: 1.65; }
+    .value-text strong { color: var(--bp-white); }
+
+    /* ===========================
+       PROCESS
+    =========================== */
+    #process {
+      padding: 120px 0;
+    }
+
+    .process-header {
+      max-width: 1200px;
+      margin: 0 auto 72px;
+      padding: 0 5%;
+      text-align: center;
+    }
+
+    .process-header .section-desc { margin: 16px auto 0; }
+
+    .process-steps {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(5% + 36px);
+      right: calc(5% + 36px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--bp-cyan), var(--bp-cyan-line), var(--bp-cyan));
+      z-index: 0;
+    }
+
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--bp-navy);
+      border: 2px solid var(--bp-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .step-circle::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px dashed var(--bp-cyan-line);
+      animation: rotateDash 12s linear infinite;
+    }
+
+    @keyframes rotateDash {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .process-step:hover .step-circle {
+      background: var(--bp-cyan);
+      box-shadow: 0 0 30px rgba(41,182,246,0.4);
+    }
+
+    .process-step:hover .step-circle svg { stroke: var(--bp-navy); }
+
+    .step-circle svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--bp-cyan);
+      fill: none;
+      transition: stroke 0.3s;
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--bp-white);
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 0.85rem;
+      color: var(--bp-muted);
+      line-height: 1.7;
+    }
+
+    .step-num {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--bp-cyan);
+      opacity: 0.6;
+      margin-bottom: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ===========================
+       TECHNOLOGIES
+    =========================== */
+    #technologies {
+      padding: 80px 0;
+      background: linear-gradient(180deg, transparent, rgba(10,42,94,0.3), transparent);
+    }
+
+    .tech-header {
+      max-width: 1200px;
+      margin: 0 auto 48px;
+      padding: 0 5%;
+      text-align: center;
+    }
+
+    .tech-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    .tech-item {
+      background: rgba(13, 59, 140, 0.2);
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 8px;
+      padding: 20px 14px;
+      text-align: center;
+      transition: var(--transition);
+      cursor: default;
+    }
+
+    .tech-item:hover {
+      border-color: var(--bp-cyan);
+      background: var(--bp-cyan-dim);
+      transform: translateY(-4px);
+    }
+
+    .tech-item-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--bp-muted);
+      letter-spacing: 0.06em;
+      margin-top: 10px;
+    }
+
+    .tech-item:hover .tech-item-name { color: var(--bp-cyan); }
+
+    .tech-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    /* ===========================
+       CASE STUDIES / RESULTS
+    =========================== */
+    #results {
+      padding: 120px 0;
+    }
+
+    .results-header {
+      max-width: 1200px;
+      margin: 0 auto 72px;
+      padding: 0 5%;
+    }
+
+    .results-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .result-card {
+      background: linear-gradient(135deg, rgba(13,59,140,0.25), rgba(3,20,46,0.5));
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 8px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .result-card:hover {
+      border-color: rgba(41,182,246,0.5);
+      transform: translateY(-4px);
+    }
+
+    .result-card.featured {
+      grid-row: span 2;
+      background: linear-gradient(135deg, rgba(21,101,192,0.3), rgba(3,20,46,0.7));
+    }
+
+    .result-card-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bp-cyan);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .result-card-metric {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--bp-cyan);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .result-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--bp-white);
+      margin-bottom: 10px;
+    }
+
+    .result-card-desc {
+      font-size: 0.875rem;
+      color: var(--bp-muted);
+      line-height: 1.7;
+    }
+
+    .result-card-bg-text {
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      font-size: 8rem;
+      font-weight: 900;
+      color: rgba(41,182,246,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ===========================
+       TEAM
+    =========================== */
+    #team {
+      padding: 120px 0;
+      background: linear-gradient(180deg, transparent, rgba(13,59,140,0.12), transparent);
+    }
+
+    .team-header {
+      max-width: 1200px;
+      margin: 0 auto 72px;
+      padding: 0 5%;
+      text-align: center;
+    }
+
+    .team-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .team-card {
+      background: rgba(13, 59, 140, 0.2);
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 8px;
+      padding: 28px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .team-card:hover {
+      border-color: var(--bp-cyan);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 50px rgba(41,182,246,0.1);
+    }
+
+    .team-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      position: relative;
+      background: var(--bp-blue);
+      border: 2px solid var(--bp-cyan-line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .team-card:hover .team-avatar { border-color: var(--bp-cyan); }
+
+    .team-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--bp-white);
+      margin-bottom: 4px;
+    }
+
+    .team-role {
+      font-size: 0.78rem;
+      color: var(--bp-cyan);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    .team-bio {
+      font-size: 0.82rem;
+      color: var(--bp-muted);
+      line-height: 1.65;
+    }
+
+    /* ===========================
+       TESTIMONIALS
+    =========================== */
+    #domains {
+      padding: 80px 0;
+    }
+
+    .domains-header {
+      max-width: 1200px;
+      margin: 0 auto 56px;
+      padding: 0 5%;
+      text-align: center;
+    }
+
+    .domains-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .domain-card {
+      background: linear-gradient(160deg, rgba(13,59,140,0.25), rgba(3,20,46,0.5));
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 8px;
+      padding: 32px 22px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: default;
+    }
+
+    .domain-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, var(--bp-cyan-dim), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .domain-card:hover {
+      border-color: var(--bp-cyan);
+      transform: translateY(-7px);
+      box-shadow: 0 18px 50px rgba(41,182,246,0.13);
+    }
+
+    .domain-card:hover::before { opacity: 1; }
+
+    .domain-icon-wrap {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: var(--bp-cyan-dim);
+      border: 1px solid var(--bp-cyan-line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+      transition: var(--transition);
+    }
+
+    .domain-card:hover .domain-icon-wrap {
+      background: var(--bp-cyan);
+      border-color: var(--bp-cyan);
+      box-shadow: 0 0 24px rgba(41,182,246,0.4);
+    }
+
+    .domain-icon-wrap svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--bp-cyan);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .domain-card:hover .domain-icon-wrap svg { stroke: var(--bp-navy); }
+
+    .domain-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bp-white);
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .domain-desc {
+      font-size: 0.8rem;
+      color: var(--bp-muted);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .domain-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .domain-bg-icon {
+      position: absolute;
+      bottom: -12px;
+      right: -8px;
+      font-size: 5rem;
+      opacity: 0.04;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .domains-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .domains-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 420px) {
+      .domains-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===========================
+       CONTACT
+    =========================== */
+    #contact {
+      padding: 120px 0;
+    }
+
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .contact-info-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .contact-info-icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 6px;
+      background: var(--bp-cyan-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-info-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--bp-cyan);
+      fill: none;
+    }
+
+    .contact-info-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--bp-cyan);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .contact-info-value {
+      font-size: 0.95rem;
+      color: var(--bp-white);
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 18px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bp-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(13, 59, 140, 0.2);
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 4px;
+      padding: 12px 16px;
+      color: var(--bp-white);
+      font-size: 0.9rem;
+      font-family: inherit;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(232,244,253,0.3); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--bp-cyan);
+      background: rgba(41, 182, 246, 0.05);
+    }
+
+    .form-group select option { background: var(--bp-navy); color: var(--bp-white); }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: rgba(3, 10, 25, 0.95);
+      border-top: 1px solid var(--bp-cyan-line);
+      padding: 64px 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.875rem;
+      color: var(--bp-muted);
+      line-height: 1.75;
+      margin-top: 16px;
+      max-width: 280px;
+    }
+
+    .footer-col-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bp-white);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      font-size: 0.875rem;
+      color: var(--bp-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--bp-cyan); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 5% 0;
+      border-top: 1px solid var(--bp-cyan-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(232,244,253,0.35);
+    }
+
+    .footer-copy span { color: var(--bp-cyan); }
+
+    /* ===========================
+       FLOATING ELEMENTS
+    =========================== */
+    .float-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+    }
+
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(41,182,246,0.08), transparent 70%);
+      top: -100px;
+      right: -100px;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(21,101,192,0.12), transparent 70%);
+      bottom: -80px;
+      left: -60px;
+    }
+
+    /* ===========================
+       CURSOR GLOW
+    =========================== */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(41,182,246,0.06), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+    }
+
+    /* ===========================
+       PROGRESS BAR
+    =========================== */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--bp-cyan), rgba(41,182,246,0.5));
+      z-index: 9999;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 10px var(--bp-cyan);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid { grid-template-columns: repeat(4, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .result-card.featured { grid-row: span 1; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .process-steps::before { display: none; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { order: -1; max-width: 320px; }
+      .hero-stats { gap: 24px; }
+      .stat-number { font-size: 1.8rem; }
+
+      .services-header { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+
+      .process-steps { grid-template-columns: 1fr; gap: 32px; }
+
+      .tech-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .results-grid { grid-template-columns: 1fr; }
+
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .domains-grid { grid-template-columns: 1fr; }
+
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .tech-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar" style="width:0%"></div>
+
+  <!-- Cursor Glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Blueprint Grid Background -->
+  <div class="bp-grid-bg" aria-hidden="true"></div>
+
+  <!-- ================================
+       NAVIGATION
+  ================================= -->
+  <nav id="mainNav" role="navigation" aria-label="Main navigation">
+    <a href="#hero" class="nav-logo" aria-label="Blueprint Knowledge Systems Home">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2" y="2" width="36" height="36" rx="4" stroke="#29B6F6" stroke-width="1.5" fill="none"/>
+          <rect x="2" y="2" width="36" height="36" rx="4" fill="rgba(41,182,246,0.06)"/>
+          <!-- Blueprint cross hairs -->
+          <line x1="20" y1="2" x2="20" y2="38" stroke="#29B6F6" stroke-width="0.75" stroke-dasharray="2,3" opacity="0.5"/>
+          <line x1="2" y1="20" x2="38" y2="20" stroke="#29B6F6" stroke-width="0.75" stroke-dasharray="2,3" opacity="0.5"/>
+          <!-- Blueprint mark -->
+          <path d="M10 14 L10 28 L16 28 C19 28 21 26 21 23 C21 21 20 20 18 19.5 C20 18.8 21 17.5 21 15.5 C21 12 19 14 16 14 Z" stroke="#29B6F6" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          <path d="M23 14 L30 28 M23 28 L30 14" stroke="#29B6F6" stroke-width="1.5" fill="none"/>
+          <!-- Corner marks -->
+          <path d="M2 8 L2 2 L8 2" stroke="#29B6F6" stroke-width="1.5" fill="none" opacity="0.8"/>
+          <path d="M32 2 L38 2 L38 8" stroke="#29B6F6" stroke-width="1.5" fill="none" opacity="0.8"/>
+          <path d="M2 32 L2 38 L8 38" stroke="#29B6F6" stroke-width="1.5" fill="none" opacity="0.8"/>
+          <path d="M32 38 L38 38 L38 32" stroke="#29B6F6" stroke-width="1.5" fill="none" opacity="0.8"/>
+        </svg>
+      </div>
+      <span class="nav-logo-text">Blueprint <span>Knowledge</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#contact" class="nav-cta">Start a Project</a></li>
+    </ul>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="#services" class="mobile-nav-link">Services</a>
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#process" class="mobile-nav-link">Process</a>
+    <a href="#results" class="mobile-nav-link">Results</a>
+    <a href="#team" class="mobile-nav-link">Team</a>
+    <a href="#contact" class="mobile-nav-link">Start a Project</a>
+  </div>
+
+  <main>
+    <!-- ================================
+         HERO
+    ================================= -->
+    <section id="hero" aria-label="Hero">
+      <div class="float-orb orb-1" aria-hidden="true"></div>
+      <div class="float-orb orb-2" aria-hidden="true"></div>
+
+      <div class="corner-mark tl" aria-hidden="true"></div>
+      <div class="corner-mark tr" aria-hidden="true"></div>
+      <div class="corner-mark bl" aria-hidden="true"></div>
+      <div class="corner-mark br" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge reveal">
+            <span class="dot"></span>
+            Accepting New Clients — Q2 2026
+          </div>
+
+          <h1 class="hero-title">
+            <span class="line reveal stagger-1">We <span class="highlight">Architect</span></span>
+            <span class="line reveal stagger-2">Your Digital</span>
+            <span class="line reveal stagger-3">Future.</span>
+          </h1>
+
+          <p class="hero-subtitle reveal stagger-4">
+            Blueprint Knowledge Systems designs and builds the software infrastructure
+            that powers modern enterprises — from system architecture to cloud-native
+            deployment and AI integration.
+          </p>
+
+          <div class="hero-actions reveal stagger-5">
+            <a href="#contact" class="btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              Start Building
+            </a>
+            <a href="#services" class="btn-outline">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              Our Services
+            </a>
+          </div>
+
+          <div class="hero-stats reveal stagger-6">
+            <div class="stat-item">
+              <div class="stat-number" data-count="150">0</div>
+              <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-count="98">0</div>
+              <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-count="12">0</div>
+              <div class="stat-label">Years of Expertise</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-right stagger-2" aria-hidden="true">
+          <svg class="blueprint-canvas" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Grid -->
+            <defs>
+              <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(41,182,246,0.1)" stroke-width="0.5"/>
+              </pattern>
+              <pattern id="largeGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+                <rect width="80" height="80" fill="url(#smallGrid)"/>
+                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(41,182,246,0.2)" stroke-width="1"/>
+              </pattern>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <rect width="480" height="480" fill="rgba(10,42,94,0.2)" rx="8"/>
+            <rect width="480" height="480" fill="url(#largeGrid)" rx="8"/>
+
+            <!-- Border -->
+            <rect x="1" y="1" width="478" height="478" rx="7" stroke="rgba(41,182,246,0.3)" stroke-width="1.5" fill="none"/>
+
+            <!-- Corner crosses -->
+            <g stroke="rgba(41,182,246,0.6)" stroke-width="1" filter="url(#glow)">
+              <line x1="0" y1="20" x2="40" y2="20"/>
+              <line x1="20" y1="0" x2="20" y2="40"/>
+              <line x1="440" y1="20" x2="480" y2="20"/>
+              <line x1="460" y1="0" x2="460" y2="40"/>
+              <line x1="0" y1="460" x2="40" y2="460"/>
+              <line x1="20" y1="440" x2="20" y2="480"/>
+              <line x1="440" y1="460" x2="480" y2="460"/>
+              <line x1="460" y1="440" x2="460" y2="480"/>
+            </g>
+
+            <!-- Main architecture diagram -->
+            <!-- Top layer: Client -->
+            <rect x="170" y="40" width="140" height="50" rx="4" stroke="#29B6F6" stroke-width="1.5" fill="rgba(41,182,246,0.08)" filter="url(#glow)"/>
+            <text x="240" y="70" text-anchor="middle" fill="#29B6F6" font-size="12" font-family="Courier New" font-weight="bold">CLIENT LAYER</text>
+
+            <!-- Arrow down -->
+            <line x1="240" y1="90" x2="240" y2="120" stroke="rgba(41,182,246,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <path d="M 234 118 L 240 126 L 246 118" stroke="#29B6F6" stroke-width="1.5" fill="none"/>
+
+            <!-- API Gateway -->
+            <rect x="130" y="126" width="220" height="50" rx="4" stroke="#29B6F6" stroke-width="1.5" fill="rgba(41,182,246,0.1)" filter="url(#glow)"/>
+            <text x="240" y="155" text-anchor="middle" fill="#29B6F6" font-size="12" font-family="Courier New" font-weight="bold">API GATEWAY</text>
+
+            <!-- Branch arrows -->
+            <line x1="180" y1="176" x2="110" y2="210" stroke="rgba(41,182,246,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="240" y1="176" x2="240" y2="210" stroke="rgba(41,182,246,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="300" y1="176" x2="370" y2="210" stroke="rgba(41,182,246,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+            <!-- Services row -->
+            <rect x="50" y="210" width="110" height="44" rx="4" stroke="rgba(41,182,246,0.7)" stroke-width="1.5" fill="rgba(41,182,246,0.07)"/>
+            <text x="105" y="237" text-anchor="middle" fill="rgba(41,182,246,0.9)" font-size="10" font-family="Courier New">AUTH SVC</text>
+
+            <rect x="185" y="210" width="110" height="44" rx="4" stroke="rgba(41,182,246,0.7)" stroke-width="1.5" fill="rgba(41,182,246,0.07)"/>
+            <text x="240" y="237" text-anchor="middle" fill="rgba(41,182,246,0.9)" font-size="10" font-family="Courier New">CORE SVC</text>
+
+            <rect x="320" y="210" width="110" height="44" rx="4" stroke="rgba(41,182,246,0.7)" stroke-width="1.5" fill="rgba(41,182,246,0.07)"/>
+            <text x="375" y="237" text-anchor="middle" fill="rgba(41,182,246,0.9)" font-size="10" font-family="Courier New">NOTIFY SVC</text>
+
+            <!-- Down to data layer -->
+            <line x1="105" y1="254" x2="105" y2="290" stroke="rgba(41,182,246,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="240" y1="254" x2="240" y2="290" stroke="rgba(41,182,246,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="375" y1="254" x2="375" y2="290" stroke="rgba(41,182,246,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+            <!-- Data layer -->
+            <rect x="50" y="290" width="110" height="44" rx="4" stroke="rgba(41,182,246,0.5)" stroke-width="1.5" fill="rgba(13,59,140,0.3)"/>
+            <text x="105" y="317" text-anchor="middle" fill="rgba(41,182,246,0.7)" font-size="10" font-family="Courier New">POSTGRES</text>
+
+            <rect x="185" y="290" width="110" height="44" rx="4" stroke="rgba(41,182,246,0.5)" stroke-width="1.5" fill="rgba(13,59,140,0.3)"/>
+            <text x="240" y="317" text-anchor="middle" fill="rgba(41,182,246,0.7)" font-size="10" font-family="Courier New">REDIS</text>
+
+            <rect x="320" y="290" width="110" height="44" rx="4" stroke="rgba(41,182,246,0.5)" stroke-width="1.5" fill="rgba(13,59,140,0.3)"/>
+            <text x="375" y="317" text-anchor="middle" fill="rgba(41,182,246,0.7)" font-size="10" font-family="Courier New">S3 / BLOB</text>
+
+            <!-- Horizontal line connecting data -->
+            <line x1="160" y1="312" x2="185" y2="312" stroke="rgba(41,182,246,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+            <line x1="295" y1="312" x2="320" y2="312" stroke="rgba(41,182,246,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+
+            <!-- Bottom infra layer -->
+            <line x1="240" y1="334" x2="240" y2="370" stroke="rgba(41,182,246,0.3)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <rect x="130" y="370" width="220" height="50" rx="4" stroke="rgba(41,182,246,0.4)" stroke-width="1.5" fill="rgba(3,20,46,0.6)"/>
+            <text x="240" y="399" text-anchor="middle" fill="rgba(41,182,246,0.6)" font-size="12" font-family="Courier New" font-weight="bold">CLOUD INFRA</text>
+
+            <!-- Measurement lines -->
+            <g stroke="rgba(41,182,246,0.25)" stroke-width="0.75">
+              <line x1="20" y1="40" x2="50" y2="40"/>
+              <line x1="20" y1="430" x2="50" y2="430"/>
+              <line x1="20" y1="40" x2="20" y2="430"/>
+              <line x1="16" y1="40" x2="24" y2="40"/>
+              <line x1="16" y1="430" x2="24" y2="430"/>
+              <text x="14" y="240" text-anchor="middle" fill="rgba(41,182,246,0.4)" font-size="8" font-family="Courier New" transform="rotate(-90, 14, 240)">STACK DEPTH: 390px</text>
+            </g>
+
+            <!-- Scan line animation -->
+            <rect x="0" y="0" width="480" height="4" fill="url(#scanGrad)" opacity="0.3">
+              <animateTransform attributeName="transform" type="translate" from="0,0" to="0,476" dur="4s" repeatCount="indefinite"/>
+            </rect>
+            <defs>
+              <linearGradient id="scanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="transparent"/>
+                <stop offset="50%" stop-color="#29B6F6"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Label: DRAFT -->
+            <text x="440" y="464" text-anchor="end" fill="rgba(41,182,246,0.2)" font-size="9" font-family="Courier New" letter-spacing="2">BKS-ARCH-v4.2</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="mouse"><div class="mouse-dot"></div></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-wrapper" aria-hidden="true">
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="marquee-item">Software Architecture</span>
+        <span class="marquee-item">Cloud Infrastructure</span>
+        <span class="marquee-item">AI Integration</span>
+        <span class="marquee-item">DevOps & CI/CD</span>
+        <span class="marquee-item">API Design</span>
+        <span class="marquee-item">Digital Transformation</span>
+        <span class="marquee-item">System Design</span>
+        <span class="marquee-item">Data Engineering</span>
+        <span class="marquee-item">Security Audits</span>
+        <span class="marquee-item">Performance Optimization</span>
+        <span class="marquee-item">Software Architecture</span>
+        <span class="marquee-item">Cloud Infrastructure</span>
+        <span class="marquee-item">AI Integration</span>
+        <span class="marquee-item">DevOps & CI/CD</span>
+        <span class="marquee-item">API Design</span>
+        <span class="marquee-item">Digital Transformation</span>
+        <span class="marquee-item">System Design</span>
+        <span class="marquee-item">Data Engineering</span>
+        <span class="marquee-item">Security Audits</span>
+        <span class="marquee-item">Performance Optimization</span>
+      </div>
+    </div>
+
+    <!-- ================================
+         SERVICES
+    ================================= -->
+    <section id="services" aria-label="Services">
+      <div class="services-header">
+        <div>
+          <p class="section-label reveal">What We Build</p>
+          <h2 class="section-title reveal stagger-1">Engineering <em>Excellence</em><br>At Every Layer</h2>
+        </div>
+        <p class="section-desc reveal stagger-2">
+          From initial discovery to production deployment, we handle every dimension
+          of modern software delivery with precision and care.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card reveal stagger-1">
+          <div class="service-card-number">01 / ARCHITECTURE</div>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h3 class="service-card-title">System Architecture</h3>
+          <p class="service-card-desc">We design scalable, resilient system blueprints — microservices, event-driven architectures, domain modeling, and infrastructure topology.</p>
+          <div class="service-card-tags">
+            <span class="tag">Microservices</span>
+            <span class="tag">DDD</span>
+            <span class="tag">Event-Driven</span>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card reveal stagger-2">
+          <div class="service-card-number">02 / ENGINEERING</div>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="service-card-title">Full-Stack Engineering</h3>
+          <p class="service-card-desc">End-to-end software development from backend APIs to polished frontends, built for performance, maintainability, and developer experience.</p>
+          <div class="service-card-tags">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Go</span>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card reveal stagger-3">
+          <div class="service-card-number">03 / CLOUD</div>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>
+          </div>
+          <h3 class="service-card-title">Cloud Infrastructure</h3>
+          <p class="service-card-desc">Kubernetes orchestration, IaC with Terraform, multi-cloud strategy, observability stacks, and cost optimization for production workloads.</p>
+          <div class="service-card-tags">
+            <span class="tag">AWS</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">Terraform</span>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card reveal stagger-1">
+          <div class="service-card-number">04 / AI & DATA</div>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <h3 class="service-card-title">AI & Data Engineering</h3>
+          <p class="service-card-desc">LLM integration, data pipeline architecture, ML infrastructure, and intelligent automation embedded directly into your product workflows.</p>
+          <div class="service-card-tags">
+            <span class="tag">LLMs</span>
+            <span class="tag">Pipelines</span>
+            <span class="tag">RAG</span>
+          </div>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card reveal stagger-2">
+          <div class="service-card-number">05 / DEVOPS</div>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12L8 16M12 12l4 4M12 2v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/></svg>
+          </div>
+          <h3 class="service-card-title">DevOps & Platform Engineering</h3>
+          <p class="service-card-desc">CI/CD pipeline design, developer portals, internal tooling, SRE practices, and operational excellence that ships software faster and safer.</p>
+          <div class="service-card-tags">
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">ArgoCD</span>
+            <span class="tag">SRE</span>
+          </div>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card reveal stagger-3">
+          <div class="service-card-number">06 / MOBILE</div>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <h3 class="service-card-title">Mobile App Development</h3>
+          <p class="service-card-desc">Cross-platform iOS and Android applications built with React Native — sharing a single codebase without sacrificing native performance or user experience.</p>
+          <div class="service-card-tags">
+            <span class="tag">React Native</span>
+            <span class="tag">iOS</span>
+            <span class="tag">Android</span>
+          </div>
+        </div>
+
+        <!-- Service 7 -->
+        <div class="service-card reveal stagger-1">
+          <div class="service-card-number">07 / ADVISORY</div>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3 class="service-card-title">Technical Advisory</h3>
+          <p class="service-card-desc">CTO-as-a-service, architecture reviews, technology due diligence, team mentorship, and roadmap planning for engineering organizations.</p>
+          <div class="service-card-tags">
+            <span class="tag">CTO Advisory</span>
+            <span class="tag">Audits</span>
+            <span class="tag">Roadmap</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+         ABOUT
+    ================================= -->
+    <section id="about" aria-label="About Blueprint Knowledge Systems">
+      <div class="about-inner">
+        <div class="about-diagram reveal-left">
+          <div class="about-diagram-box">
+            <div class="corner-mark tl" aria-hidden="true"></div>
+            <div class="corner-mark tr" aria-hidden="true"></div>
+            <div class="corner-mark bl" aria-hidden="true"></div>
+            <div class="corner-mark br" aria-hidden="true"></div>
+
+            <div class="diagram-title">// EXPERTISE DEPTH ANALYSIS</div>
+            <div class="diagram-layers">
+              <div class="diagram-layer">
+                <div class="diagram-layer-header">
+                  <span class="layer-name">Architecture & Design</span>
+                  <span class="layer-pct">92%</span>
+                </div>
+                <div class="layer-bar" data-width="92%"></div>
+              </div>
+              <div class="diagram-layer">
+                <div class="diagram-layer-header">
+                  <span class="layer-name">Cloud & Infrastructure</span>
+                  <span class="layer-pct">88%</span>
+                </div>
+                <div class="layer-bar" data-width="88%"></div>
+              </div>
+              <div class="diagram-layer">
+                <div class="diagram-layer-header">
+                  <span class="layer-name">Full-Stack Engineering</span>
+                  <span class="layer-pct">95%</span>
+                </div>
+                <div class="layer-bar" data-width="95%"></div>
+              </div>
+              <div class="diagram-layer">
+                <div class="diagram-layer-header">
+                  <span class="layer-name">AI & Machine Learning</span>
+                  <span class="layer-pct">82%</span>
+                </div>
+                <div class="layer-bar" data-width="82%"></div>
+              </div>
+              <div class="diagram-layer">
+                <div class="diagram-layer-header">
+                  <span class="layer-name">DevOps & Platform</span>
+                  <span class="layer-pct">90%</span>
+                </div>
+                <div class="layer-bar" data-width="90%"></div>
+              </div>
+              <div class="diagram-layer">
+                <div class="diagram-layer-header">
+                  <span class="layer-name">Mobile & App Dev</span>
+                  <span class="layer-pct">85%</span>
+                </div>
+                <div class="layer-bar" data-width="85%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-content reveal-right">
+          <p class="section-label">Our Philosophy</p>
+          <h2 class="section-title">Built on <em>First Principles</em></h2>
+          <p class="section-desc">
+            We don't follow trends. We understand systems deeply, reason from first principles,
+            and craft solutions that are exactly as complex as they need to be — and no more.
+          </p>
+
+          <ul class="values-list" aria-label="Our values">
+            <li>
+              <div class="check-icon" aria-hidden="true"></div>
+              <span class="value-text"><strong>Documentation as code.</strong> Every architecture decision is recorded, versioned, and accessible to your entire team — not locked in someone's head.</span>
+            </li>
+            <li>
+              <div class="check-icon" aria-hidden="true"></div>
+              <span class="value-text"><strong>Operational ownership.</strong> We don't disappear post-launch. We embed with your team until you own and understand every line we shipped.</span>
+            </li>
+            <li>
+              <div class="check-icon" aria-hidden="true"></div>
+              <span class="value-text"><strong>Scalability by design.</strong> Systems built to handle 10x growth without architectural rewrites — because surprises are expensive.</span>
+            </li>
+            <li>
+              <div class="check-icon" aria-hidden="true"></div>
+              <span class="value-text"><strong>Security-first mindset.</strong> Threat modeling, secrets management, and least-privilege access are part of every blueprint we draw.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+         PROCESS
+    ================================= -->
+    <section id="process" aria-label="Our process">
+      <div class="process-header">
+        <p class="section-label reveal">How We Work</p>
+        <h2 class="section-title reveal stagger-1">From <em>Blueprint</em> to<br>Production</h2>
+        <p class="section-desc reveal stagger-2">A repeatable, transparent process that keeps your team informed and your project on track at every phase.</p>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step reveal stagger-1">
+          <div class="step-num">PHASE.01</div>
+          <div class="step-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3 class="step-title">Discovery</h3>
+          <p class="step-desc">Deep-dive into your business goals, technical constraints, and team capabilities to define the scope and success criteria.</p>
+        </div>
+
+        <div class="process-step reveal stagger-2">
+          <div class="step-num">PHASE.02</div>
+          <div class="step-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3 class="step-title">Blueprint</h3>
+          <p class="step-desc">Produce detailed architecture diagrams, technical specifications, data models, and API contracts before writing a single line of code.</p>
+        </div>
+
+        <div class="process-step reveal stagger-3">
+          <div class="step-num">PHASE.03</div>
+          <div class="step-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="step-title">Build</h3>
+          <p class="step-desc">Iterative sprints with weekly demos, continuous integration, automated testing, and transparent progress tracked in your tools of choice.</p>
+        </div>
+
+        <div class="process-step reveal stagger-4">
+          <div class="step-num">PHASE.04</div>
+          <div class="step-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 class="step-title">Operate</h3>
+          <p class="step-desc">Production deployment, monitoring setup, runbook creation, team onboarding, and a handoff that leaves your team fully empowered.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+         TECHNOLOGIES
+    ================================= -->
+    <section id="technologies" aria-label="Technologies we use">
+      <div class="tech-header">
+        <p class="section-label reveal">Our Stack</p>
+        <h2 class="section-title reveal stagger-1">Technology <em>Expertise</em></h2>
+      </div>
+
+      <div class="tech-grid" role="list">
+        <div class="tech-item reveal stagger-1" role="listitem">
+          <div class="tech-icon" aria-label="React">⚛️</div>
+          <div class="tech-item-name">React</div>
+        </div>
+        <div class="tech-item reveal stagger-2" role="listitem">
+          <div class="tech-icon" aria-label="Node.js">🟩</div>
+          <div class="tech-item-name">Node.js</div>
+        </div>
+        <div class="tech-item reveal stagger-3" role="listitem">
+          <div class="tech-icon" aria-label="Go">🐹</div>
+          <div class="tech-item-name">Go</div>
+        </div>
+        <div class="tech-item reveal stagger-4" role="listitem">
+          <div class="tech-icon" aria-label="Python">🐍</div>
+          <div class="tech-item-name">Python</div>
+        </div>
+        <div class="tech-item reveal stagger-5" role="listitem">
+          <div class="tech-icon" aria-label="PostgreSQL">🐘</div>
+          <div class="tech-item-name">PostgreSQL</div>
+        </div>
+        <div class="tech-item reveal stagger-6" role="listitem">
+          <div class="tech-icon" aria-label="Kubernetes">☸️</div>
+          <div class="tech-item-name">Kubernetes</div>
+        </div>
+        <div class="tech-item reveal stagger-1" role="listitem">
+          <div class="tech-icon" aria-label="AWS">☁️</div>
+          <div class="tech-item-name">AWS</div>
+        </div>
+        <div class="tech-item reveal stagger-2" role="listitem">
+          <div class="tech-icon" aria-label="Terraform">🏗️</div>
+          <div class="tech-item-name">Terraform</div>
+        </div>
+        <div class="tech-item reveal stagger-3" role="listitem">
+          <div class="tech-icon" aria-label="Docker">🐳</div>
+          <div class="tech-item-name">Docker</div>
+        </div>
+        <div class="tech-item reveal stagger-4" role="listitem">
+          <div class="tech-icon" aria-label="Redis">🔴</div>
+          <div class="tech-item-name">Redis</div>
+        </div>
+        <div class="tech-item reveal stagger-5" role="listitem">
+          <div class="tech-icon" aria-label="GraphQL">◈</div>
+          <div class="tech-item-name">GraphQL</div>
+        </div>
+        <div class="tech-item reveal stagger-6" role="listitem">
+          <div class="tech-icon" aria-label="TypeScript">📘</div>
+          <div class="tech-item-name">TypeScript</div>
+        </div>
+        <div class="tech-item reveal stagger-1" role="listitem">
+          <div class="tech-icon" aria-label="Java">☕</div>
+          <div class="tech-item-name">Java</div>
+        </div>
+        <div class="tech-item reveal stagger-2" role="listitem">
+          <div class="tech-icon" aria-label="React Native">📱</div>
+          <div class="tech-item-name">React Native</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+         RESULTS
+    ================================= -->
+    <section id="results" aria-label="Results and case studies">
+      <div class="results-header">
+        <p class="section-label reveal">Impact</p>
+        <h2 class="section-title reveal stagger-1">Measurable <em>Results</em></h2>
+        <p class="section-desc reveal stagger-2">Real numbers from real engagements. We measure success by the outcomes we create for clients.</p>
+      </div>
+
+      <div class="results-grid">
+        <div class="result-card featured reveal-left">
+          <div class="result-card-label">Case Study — FinTech Scale-Up</div>
+          <div class="result-card-metric">10x</div>
+          <h3 class="result-card-title">Transaction Throughput Increase</h3>
+          <p class="result-card-desc">Redesigned a monolithic payment processing platform into event-driven microservices running on Kubernetes, increasing throughput from 1K to 10K TPS while cutting infrastructure costs by 40%.</p>
+          <div class="service-card-tags" style="margin-top: 24px;">
+            <span class="tag">Microservices</span>
+            <span class="tag">Kafka</span>
+            <span class="tag">K8s</span>
+            <span class="tag">AWS</span>
+          </div>
+          <div class="result-card-bg-text" aria-hidden="true">10x</div>
+        </div>
+
+        <div class="result-card reveal stagger-1">
+          <div class="result-card-label">Healthcare SaaS</div>
+          <div class="result-card-metric">3mo</div>
+          <h3 class="result-card-title">MVP to Production</h3>
+          <p class="result-card-desc">Took a complex HIPAA-compliant clinical data platform from zero to production in 90 days with full test coverage.</p>
+          <div class="result-card-bg-text" aria-hidden="true">90</div>
+        </div>
+
+        <div class="result-card reveal stagger-2">
+          <div class="result-card-label">E-Commerce Platform</div>
+          <div class="result-card-metric">99.97%</div>
+          <h3 class="result-card-title">Uptime Achieved</h3>
+          <p class="result-card-desc">Rebuilt a legacy Magento monolith as a composable commerce architecture, eliminating outages during peak traffic.</p>
+          <div class="result-card-bg-text" aria-hidden="true">%</div>
+        </div>
+
+        <div class="result-card reveal stagger-3">
+          <div class="result-card-label">Enterprise SaaS</div>
+          <div class="result-card-metric">60%</div>
+          <h3 class="result-card-title">Reduction in Deploy Time</h3>
+          <p class="result-card-desc">Implemented a full GitOps pipeline with ArgoCD and automated testing gates, reducing deploy cycles from 3 days to 2 hours.</p>
+          <div class="result-card-bg-text" aria-hidden="true">↓</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+         TEAM
+    ================================= -->
+    <section id="team" aria-label="Our team">
+      <div class="team-header">
+        <p class="section-label reveal">The Architects</p>
+        <h2 class="section-title reveal stagger-1">The Minds <em>Behind</em><br>the Blueprint</h2>
+        <p class="section-desc reveal stagger-2" style="margin: 16px auto 0;">Senior engineers and architects with decades of collective experience building systems at scale.</p>
+      </div>
+
+      <div class="team-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div class="team-card reveal stagger-1">
+          <div class="team-avatar" aria-hidden="true">🧑‍💻</div>
+          <div class="team-name">Briano Bruno</div>
+          <div class="team-role">Principal Architect</div>
+          <p class="team-bio">Full-stack architect and systems thinker specializing in scalable platform design, cloud-native infrastructure, and translating complex business requirements into elegant, maintainable software solutions.</p>
+        </div>
+
+        <div class="team-card reveal stagger-2">
+          <div class="team-avatar" aria-hidden="true">👨‍💻</div>
+          <div class="team-name">Michael Kholodovsky</div>
+          <div class="team-role">Principal Architect</div>
+          <p class="team-bio">Distributed systems engineer with deep expertise in high-performance backends, data engineering pipelines, and AI integration — bringing rigorous engineering discipline to every engagement.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+         TESTIMONIALS
+    ================================= -->
+    <!-- ================================
+         DOMAIN KNOWLEDGE
+    ================================= -->
+    <section id="domains" aria-label="Domain knowledge">
+      <div class="domains-header">
+        <p class="section-label reveal">Industries We Serve</p>
+        <h2 class="section-title reveal stagger-1">Deep <em>Domain</em> Knowledge</h2>
+        <p class="section-desc reveal stagger-2" style="margin: 16px auto 0;">We don't just understand software — we understand your industry. Every blueprint we draw is informed by years of vertical expertise.</p>
+      </div>
+
+      <div class="domains-grid">
+
+        <!-- Financial Systems -->
+        <div class="domain-card reveal stagger-1">
+          <div class="domain-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <div class="domain-name">Financial Systems</div>
+          <p class="domain-desc">Secure, audit-ready platforms for payments, lending, trading, and financial reporting built to meet compliance standards.</p>
+          <div class="domain-tags">
+            <span class="tag">PCI-DSS</span>
+            <span class="tag">SOC 2</span>
+            <span class="tag">Payments</span>
+          </div>
+          <div class="domain-bg-icon" aria-hidden="true">$</div>
+        </div>
+
+        <!-- Healthcare -->
+        <div class="domain-card reveal stagger-2">
+          <div class="domain-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="domain-name">Healthcare</div>
+          <p class="domain-desc">HIPAA-compliant systems for dental practices, physician offices, scheduling, EHR integration, and patient communication portals.</p>
+          <div class="domain-tags">
+            <span class="tag">HIPAA</span>
+            <span class="tag">HL7/FHIR</span>
+            <span class="tag">EHR</span>
+          </div>
+          <div class="domain-bg-icon" aria-hidden="true">🏥</div>
+        </div>
+
+        <!-- Legal / Law Firms -->
+        <div class="domain-card reveal stagger-3">
+          <div class="domain-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="domain-name">Legal &amp; Law Firms</div>
+          <p class="domain-desc">Matter management, document automation, client portals, and billing software tailored to the unique workflows of legal practices.</p>
+          <div class="domain-tags">
+            <span class="tag">Doc Automation</span>
+            <span class="tag">Client Portals</span>
+            <span class="tag">Billing</span>
+          </div>
+          <div class="domain-bg-icon" aria-hidden="true">⚖️</div>
+        </div>
+
+        <!-- Small Business -->
+        <div class="domain-card reveal stagger-4">
+          <div class="domain-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="domain-name">Small Business</div>
+          <p class="domain-desc">Right-sized digital tools — booking systems, CRMs, operational dashboards, and automation that punch above their weight without enterprise overhead.</p>
+          <div class="domain-tags">
+            <span class="tag">CRM</span>
+            <span class="tag">Booking</span>
+            <span class="tag">Automation</span>
+          </div>
+          <div class="domain-bg-icon" aria-hidden="true">🏪</div>
+        </div>
+
+        <!-- Ecommerce -->
+        <div class="domain-card reveal stagger-5">
+          <div class="domain-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </div>
+          <div class="domain-name">Ecommerce</div>
+          <p class="domain-desc">High-performance storefronts, inventory management, order fulfillment pipelines, and composable commerce architectures built to scale with demand.</p>
+          <div class="domain-tags">
+            <span class="tag">Storefronts</span>
+            <span class="tag">Inventory</span>
+            <span class="tag">Payments</span>
+          </div>
+          <div class="domain-bg-icon" aria-hidden="true">🛒</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================
+         CONTACT
+    ================================= -->
+    <section id="contact" aria-label="Contact us">
+      <div class="contact-inner">
+        <div class="reveal-left">
+          <p class="section-label">Get In Touch</p>
+          <h2 class="section-title">Let's Draw Your<br><em>Blueprint</em> Together</h2>
+          <p class="section-desc">Ready to architect something great? Tell us about your project and we'll get back to you within one business day.</p>
+
+          <div style="margin-top: 48px;">
+            <div class="contact-info-item">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Email</div>
+                <div class="contact-info-value">contact@blueprintknowledgesystems.com</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Phone</div>
+                <div class="contact-info-value">+1 (800) BKS-TECH</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Location</div>
+                <div class="contact-info-value">Remote-first · Nationwide</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-right">
+          <form class="contact-form" id="contactForm" aria-label="Contact form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Alex" required autocomplete="given-name"/>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Chen" required autocomplete="family-name"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Work Email</label>
+              <input type="email" id="email" name="email" placeholder="alex@company.com" required autocomplete="email"/>
+            </div>
+
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" placeholder="Acme Corp" autocomplete="organization"/>
+            </div>
+
+            <div class="form-group">
+              <label for="service">Service Interest</label>
+              <select id="service" name="service">
+                <option value="" disabled selected>Select a service...</option>
+                <option value="architecture">System Architecture</option>
+                <option value="engineering">Full-Stack Engineering</option>
+                <option value="cloud">Cloud Infrastructure</option>
+                <option value="ai">AI & Data Engineering</option>
+                <option value="mobile">Mobile App Development</option>
+                <option value="devops">DevOps & Platform</option>
+                <option value="advisory">Technical Advisory</option>
+                <option value="other">Other / Not Sure</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Tell Us About Your Project</label>
+              <textarea id="message" name="message" placeholder="Describe your project, challenges, and goals..."></textarea>
+            </div>
+
+            <button type="submit" id="contactSubmitBtn" class="btn-primary" style="width: 100%; justify-content: center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send Message
+            </button>
+
+            <div id="formSuccess" role="alert" aria-live="polite" style="display:none; align-items:center; gap:14px; padding:18px 22px; background:rgba(30,140,78,0.12); border:1px solid rgba(30,140,78,0.4); border-radius:6px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4caf7d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+              <span style="font-size:0.9rem; color:#4caf7d; font-weight:600;">Message sent! We'll be in touch within one business day.</span>
+            </div>
+
+            <div id="formError" role="alert" aria-live="polite" style="display:none; align-items:center; gap:14px; padding:18px 22px; background:rgba(220,53,69,0.1); border:1px solid rgba(220,53,69,0.35); border-radius:6px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e57373" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span style="font-size:0.9rem; color:#e57373; font-weight:600;">Something went wrong. Please try again or email us directly.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================
+       FOOTER
+  ================================= -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <a href="#hero" class="nav-logo" style="margin-bottom: 0;" aria-label="Blueprint Knowledge Systems Home">
+          <div class="nav-logo-icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="2" width="36" height="36" rx="4" stroke="#29B6F6" stroke-width="1.5" fill="rgba(41,182,246,0.06)"/>
+              <line x1="20" y1="2" x2="20" y2="38" stroke="#29B6F6" stroke-width="0.75" stroke-dasharray="2,3" opacity="0.5"/>
+              <line x1="2" y1="20" x2="38" y2="20" stroke="#29B6F6" stroke-width="0.75" stroke-dasharray="2,3" opacity="0.5"/>
+              <path d="M10 14 L10 28 L16 28 C19 28 21 26 21 23 C21 21 20 20 18 19.5 C20 18.8 21 17.5 21 15.5 C21 12 19 14 16 14 Z" stroke="#29B6F6" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+              <path d="M23 14 L30 28 M23 28 L30 14" stroke="#29B6F6" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <span class="nav-logo-text">Blueprint <span>Knowledge</span></span>
+        </a>
+        <p class="footer-brand-desc">We architect the software systems that power modern businesses — from first principles to final deployment.</p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">System Architecture</a></li>
+          <li><a href="#services">Full-Stack Engineering</a></li>
+          <li><a href="#services">Cloud Infrastructure</a></li>
+          <li><a href="#services">AI & Data Engineering</a></li>
+          <li><a href="#services">DevOps & Platform</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#team">The Team</a></li>
+          <li><a href="#results">Case Studies</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Connect</div>
+        <ul class="footer-links">
+          <li><a href="#" rel="noopener">LinkedIn</a></li>
+          <li><a href="#" rel="noopener">GitHub</a></li>
+          <li><a href="#" rel="noopener">Twitter / X</a></li>
+          <li><a href="#" rel="noopener">Blog</a></li>
+          <li><a href="mailto:contact@blueprintknowledgesystems.com">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 <span>Blueprint Knowledge Systems</span>. All rights reserved.</p>
+      <p class="footer-copy" style="font-family: 'Courier New', monospace; font-size: 0.72rem; opacity: 0.5;">// BKS-SITE-v1.0.0</p>
+    </div>
+  </footer>
+
+  <!-- ================================
+       JAVASCRIPT
+  ================================= -->
+  <script>
+    'use strict';
+
+    // ── Cursor Glow ──────────────────────────────
+    const cursorGlow = document.getElementById('cursorGlow');
+    let mouseX = -300, mouseY = -300;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    (function animateCursor() {
+      cursorGlow.style.left = mouseX + 'px';
+      cursorGlow.style.top  = mouseY + 'px';
+      requestAnimationFrame(animateCursor);
+    })();
+
+    // ── Scroll Progress Bar ───────────────────────
+    const progressBar = document.getElementById('progressBar');
+
+    function updateProgress() {
+      const scrollTop  = window.scrollY;
+      const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+      const pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ── Nav Scroll Effect ─────────────────────────
+    const mainNav = document.getElementById('mainNav');
+
+    function updateNav() {
+      mainNav.classList.toggle('scrolled', window.scrollY > 80);
+    }
+
+    window.addEventListener('scroll', updateNav, { passive: true });
+
+    // ── Mobile Menu ───────────────────────────────
+    const hamburger    = document.getElementById('hamburger');
+    const mobileMenu   = document.getElementById('mobileMenu');
+    const mobileLinks  = mobileMenu.querySelectorAll('.mobile-nav-link');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ── Scroll Reveal ─────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ── Counter Animation ─────────────────────────
+    function animateCounter(el, target, suffix) {
+      const duration = 1600;
+      const start    = performance.now();
+
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased    = 1 - Math.pow(1 - progress, 3);
+        const current  = Math.round(eased * target);
+        el.textContent = current + (suffix || '');
+        if (progress < 1) requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    const counterEls = document.querySelectorAll('[data-count]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el     = entry.target;
+          const target = parseInt(el.getAttribute('data-count'), 10);
+          const suffix = target === 98 ? '%' : (target === 12 ? '+' : '+');
+          animateCounter(el, target, suffix);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counterEls.forEach(el => counterObserver.observe(el));
+
+    // ── Skill bar animation ───────────────────────
+    const layerBars = document.querySelectorAll('.layer-bar');
+
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bars = entry.target.querySelectorAll('.layer-bar');
+          bars.forEach((bar, i) => {
+            const target = bar.getAttribute('data-width') || '80%';
+            bar.style.width = '0';
+            setTimeout(() => { bar.style.width = target; }, i * 120);
+          });
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const diagramBox = document.querySelector('.about-diagram-box');
+    if (diagramBox) barObserver.observe(diagramBox);
+
+    // ── Active nav link on scroll ─────────────────
+    const sections    = document.querySelectorAll('section[id]');
+    const navAnchors  = document.querySelectorAll('.nav-links a');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navAnchors.forEach(a => {
+            a.style.color = '';
+            const href = a.getAttribute('href');
+            if (href === '#' + entry.target.id) {
+              a.style.color = 'var(--bp-cyan)';
+            }
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => sectionObserver.observe(s));
+
+    // ── Parallax on hero visual ───────────────────
+    const heroVisual = document.querySelector('.hero-visual');
+
+    if (heroVisual && window.matchMedia('(min-width: 769px)').matches) {
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        heroVisual.style.transform = `translateY(${scrollY * 0.08}px)`;
+      }, { passive: true });
+    }
+
+    // ── Service card tilt effect ──────────────────
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect   = card.getBoundingClientRect();
+        const cx     = rect.left + rect.width / 2;
+        const cy     = rect.top  + rect.height / 2;
+        const dx     = (e.clientX - cx) / (rect.width  / 2);
+        const dy     = (e.clientY - cy) / (rect.height / 2);
+        card.style.transform = `translateY(-6px) rotateY(${dx * 4}deg) rotateX(${-dy * 4}deg)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // ── Form submit (demo) ────────────────────────
+
+    // ── Contact form (Formspree AJAX) ─────────────
+    const FORMSPREE_URL = 'https://formspree.io/f/xvzwbzve';
+
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const form       = this;
+      const btn        = document.getElementById('contactSubmitBtn');
+      const successEl  = document.getElementById('formSuccess');
+      const errorEl    = document.getElementById('formError');
+      const origLabel  = btn.textContent.trim();
+
+      successEl.style.display = 'none';
+      errorEl.style.display   = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(FORMSPREE_URL, {
+          method:  'POST',
+          headers: { 'Accept': 'application/json' },
+          body:    new FormData(form)
+        });
+
+        if (res.ok) {
+          successEl.style.display = 'flex';
+          form.reset();
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          errorEl.style.display = 'flex';
+        }
+      } catch (_) {
+        errorEl.style.display = 'flex';
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message';
+      }
+    });
+
+    // ── Keyboard navigation ───────────────────────
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (mobileMenu.classList.contains('open')) {
+          mobileMenu.classList.remove('open');
+          hamburger.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+
+    // ── Initial calls ─────────────────────────────
+    updateProgress();
+    updateNav();
+  </script>
+</body>
+</html>
