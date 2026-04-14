@@ -20,35 +20,134 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Blueprint Knowledge Systems" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:url" content="https://blueprintknowledgesystems.com/" />
   <meta property="og:title" content="Blueprint Knowledge Systems | Software Consulting & Engineering" />
-  <meta property="og:description" content="We architect your digital future. Expert software consulting in architecture, engineering, cloud, and AI-driven solutions." />
+  <meta property="og:description" content="Software consulting firm architecting scalable systems, cloud infrastructure, and AI-driven solutions for modern enterprises." />
   <meta property="og:image" content="https://blueprintknowledgesystems.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Blueprint Knowledge Systems — Software Consulting & Engineering" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://blueprintknowledgesystems.com/" />
   <meta name="twitter:title" content="Blueprint Knowledge Systems | Software Consulting" />
-  <meta name="twitter:description" content="We architect your digital future. Expert software consulting in architecture, engineering, cloud, and AI-driven solutions." />
+  <meta name="twitter:description" content="Software consulting firm architecting scalable systems, cloud infrastructure, and AI-driven solutions for modern enterprises." />
+  <meta name="twitter:image" content="https://blueprintknowledgesystems.com/og-image.jpg" />
+  <meta name="twitter:image:alt" content="Blueprint Knowledge Systems — Software Consulting & Engineering" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Blueprint Knowledge Systems",
-    "description": "Software consulting firm specializing in architecture design, full-stack engineering, cloud infrastructure, and digital transformation.",
-    "url": "https://blueprintknowledgesystems.com",
-    "telephone": "+1-800-257-8324",
-    "email": "contact@blueprintknowledgesystems.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "US"
-    },
-    "sameAs": [
-      "https://linkedin.com/company/blueprintknowledgesystems",
-      "https://github.com/blueprintknowledgesystems"
-    ],
-    "serviceType": ["Software Architecture", "Cloud Consulting", "Digital Transformation", "AI Integration"]
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://blueprintknowledgesystems.com/#organization",
+        "name": "Blueprint Knowledge Systems",
+        "alternateName": "BKS",
+        "url": "https://blueprintknowledgesystems.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://blueprintknowledgesystems.com/favicon.svg",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://blueprintknowledgesystems.com/og-image.jpg",
+        "description": "Software consulting firm specializing in architecture design, full-stack engineering, cloud infrastructure, and digital transformation.",
+        "email": "contact@blueprintknowledgesystems.com",
+        "telephone": "+1-951-257-8324",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "US",
+          "addressRegion": "CA"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "United States"
+        },
+        "founder": [
+          { "@type": "Person", "name": "Briano Bruno", "jobTitle": "Principal Architect" },
+          { "@type": "Person", "name": "Michael Kholodovsky", "jobTitle": "Principal Architect" }
+        ]
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://blueprintknowledgesystems.com/#service",
+        "name": "Blueprint Knowledge Systems — Software Consulting",
+        "url": "https://blueprintknowledgesystems.com",
+        "parentOrganization": { "@id": "https://blueprintknowledgesystems.com/#organization" },
+        "priceRange": "$$$",
+        "serviceType": [
+          "Software Architecture Consulting",
+          "Full-Stack Engineering",
+          "Cloud Infrastructure",
+          "AI & Data Engineering",
+          "Mobile App Development",
+          "DevOps & Platform Engineering",
+          "Digital Transformation"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Software Consulting Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "System Architecture" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full-Stack Engineering" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Infrastructure" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI & Data Engineering" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "DevOps & Platform" } }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://blueprintknowledgesystems.com/#website",
+        "url": "https://blueprintknowledgesystems.com",
+        "name": "Blueprint Knowledge Systems",
+        "publisher": { "@id": "https://blueprintknowledgesystems.com/#organization" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Blueprint Knowledge Systems do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We are a software consulting firm that designs and builds system architecture, cloud infrastructure, full-stack applications, and AI integrations for modern enterprises."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What industries do you serve?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We serve healthcare, legal, retail, e-commerce, logistics, SaaS, and enterprise clients across the United States."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do engagements start?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every engagement begins with a free architecture review where we assess your current systems, goals, and constraints, then scope a consulting proposal."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you work remotely?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Blueprint Knowledge Systems is remote-first and serves clients nationwide across the United States."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
 
@@ -65,7 +164,7 @@
       --bp-cyan-dim:  rgba(41, 182, 246, 0.18);
       --bp-cyan-line: rgba(41, 182, 246, 0.35);
       --bp-white:     #E8F4FD;
-      --bp-muted:     rgba(232, 244, 253, 0.6);
+      --bp-muted:     rgba(232, 244, 253, 0.78);
       --bp-grid:      rgba(41, 182, 246, 0.08);
       --transition:   0.4s cubic-bezier(0.16, 1, 0.3, 1);
       --radius:       4px;
@@ -77,6 +176,39 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html { scroll-behavior: smooth; font-size: 16px; }
+
+    /* Accessibility: global focus indicator */
+    :focus-visible {
+      outline: 2px solid var(--bp-cyan);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* Skip link for keyboard users */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      z-index: 10000;
+      background: var(--bp-cyan);
+      color: var(--bp-navy);
+      padding: 12px 20px;
+      font-weight: 700;
+      border-radius: 4px;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 16px; }
+
+    /* Respect reduced motion preferences (WCAG 2.3.3) */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
 
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -1055,8 +1187,18 @@
     .tech-item:hover .tech-item-name { color: var(--bp-cyan); }
 
     .tech-icon {
-      font-size: 1.6rem;
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
       line-height: 1;
+      color: var(--bp-cyan);
+      padding: 10px 12px;
+      border: 1px solid var(--bp-cyan-line);
+      border-radius: 4px;
+      background: rgba(41, 182, 246, 0.06);
+      min-width: 48px;
+      text-align: center;
     }
 
     /* ===========================
@@ -1194,7 +1336,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-family: 'Courier New', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--bp-cyan);
       transition: border-color 0.3s;
     }
 
@@ -1651,6 +1797,8 @@
   <!-- ================================
        NAVIGATION
   ================================= -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
   <nav id="mainNav" role="navigation" aria-label="Main navigation">
     <a href="#hero" class="nav-logo" aria-label="Blueprint Knowledge Systems Home">
       <div class="nav-logo-icon">
@@ -1696,7 +1844,7 @@
     <a href="#contact" class="mobile-nav-link">Start a Project</a>
   </div>
 
-  <main>
+  <main id="main">
     <!-- ================================
          HERO
     ================================= -->
@@ -1713,25 +1861,26 @@
         <div class="hero-content">
           <div class="hero-badge reveal">
             <span class="dot"></span>
-            Accepting New Clients — Q2 2026
+            Now Accepting New Engagements
           </div>
 
           <h1 class="hero-title">
-            <span class="line reveal stagger-1">We <span class="highlight">Architect</span></span>
-            <span class="line reveal stagger-2">Your Digital</span>
-            <span class="line reveal stagger-3">Future.</span>
+            <span class="line reveal stagger-1">Software <span class="highlight">Consulting</span></span>
+            <span class="line reveal stagger-2">That Architects</span>
+            <span class="line reveal stagger-3">Your Digital Future.</span>
           </h1>
 
           <p class="hero-subtitle reveal stagger-4">
-            Blueprint Knowledge Systems designs and builds the software infrastructure
-            that powers modern enterprises — from system architecture to cloud-native
-            deployment and AI integration.
+            Blueprint Knowledge Systems is a software consulting firm that designs and
+            builds the infrastructure powering modern enterprises — from system
+            architecture and full-stack engineering to cloud-native deployment and
+            AI integration.
           </p>
 
           <div class="hero-actions reveal stagger-5">
             <a href="#contact" class="btn-primary">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              Start Building
+              Book a Free Architecture Review
             </a>
             <a href="#services" class="btn-outline">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
@@ -1741,15 +1890,15 @@
 
           <div class="hero-stats reveal stagger-6">
             <div class="stat-item">
-              <div class="stat-number" data-count="36">0</div>
+              <div class="stat-number" data-count="36" data-suffix="+">0</div>
               <div class="stat-label">Projects Delivered</div>
             </div>
             <div class="stat-item">
-              <div class="stat-number" data-count="98">0</div>
+              <div class="stat-number" data-count="98" data-suffix="%">0</div>
               <div class="stat-label">Client Satisfaction</div>
             </div>
             <div class="stat-item">
-              <div class="stat-number" data-count="16">0</div>
+              <div class="stat-number" data-count="16" data-suffix="+">0</div>
               <div class="stat-label">Years of Expertise</div>
             </div>
           </div>
@@ -2175,59 +2324,59 @@
 
       <div class="tech-grid" role="list">
         <div class="tech-item reveal stagger-1" role="listitem">
-          <div class="tech-icon" aria-label="React">⚛️</div>
+          <div class="tech-icon" aria-hidden="true">Rx</div>
           <div class="tech-item-name">React</div>
         </div>
         <div class="tech-item reveal stagger-2" role="listitem">
-          <div class="tech-icon" aria-label="Node.js">🟩</div>
+          <div class="tech-icon" aria-hidden="true">Node</div>
           <div class="tech-item-name">Node.js</div>
         </div>
         <div class="tech-item reveal stagger-3" role="listitem">
-          <div class="tech-icon" aria-label="Go">🐹</div>
+          <div class="tech-icon" aria-hidden="true">Go</div>
           <div class="tech-item-name">Go</div>
         </div>
         <div class="tech-item reveal stagger-4" role="listitem">
-          <div class="tech-icon" aria-label="Python">🐍</div>
+          <div class="tech-icon" aria-hidden="true">Py</div>
           <div class="tech-item-name">Python</div>
         </div>
         <div class="tech-item reveal stagger-5" role="listitem">
-          <div class="tech-icon" aria-label="PostgreSQL">🐘</div>
+          <div class="tech-icon" aria-hidden="true">PG</div>
           <div class="tech-item-name">PostgreSQL</div>
         </div>
         <div class="tech-item reveal stagger-6" role="listitem">
-          <div class="tech-icon" aria-label="Kubernetes">☸️</div>
+          <div class="tech-icon" aria-hidden="true">K8s</div>
           <div class="tech-item-name">Kubernetes</div>
         </div>
         <div class="tech-item reveal stagger-1" role="listitem">
-          <div class="tech-icon" aria-label="AWS">☁️</div>
+          <div class="tech-icon" aria-hidden="true">AWS</div>
           <div class="tech-item-name">AWS</div>
         </div>
         <div class="tech-item reveal stagger-2" role="listitem">
-          <div class="tech-icon" aria-label="Terraform">🏗️</div>
+          <div class="tech-icon" aria-hidden="true">TF</div>
           <div class="tech-item-name">Terraform</div>
         </div>
         <div class="tech-item reveal stagger-3" role="listitem">
-          <div class="tech-icon" aria-label="Docker">🐳</div>
+          <div class="tech-icon" aria-hidden="true">Dk</div>
           <div class="tech-item-name">Docker</div>
         </div>
         <div class="tech-item reveal stagger-4" role="listitem">
-          <div class="tech-icon" aria-label="Redis">🔴</div>
+          <div class="tech-icon" aria-hidden="true">Rd</div>
           <div class="tech-item-name">Redis</div>
         </div>
         <div class="tech-item reveal stagger-5" role="listitem">
-          <div class="tech-icon" aria-label="GraphQL">◈</div>
+          <div class="tech-icon" aria-hidden="true">GQL</div>
           <div class="tech-item-name">GraphQL</div>
         </div>
         <div class="tech-item reveal stagger-6" role="listitem">
-          <div class="tech-icon" aria-label="TypeScript">📘</div>
+          <div class="tech-icon" aria-hidden="true">TS</div>
           <div class="tech-item-name">TypeScript</div>
         </div>
         <div class="tech-item reveal stagger-1" role="listitem">
-          <div class="tech-icon" aria-label="Java">☕</div>
+          <div class="tech-icon" aria-hidden="true">Jv</div>
           <div class="tech-item-name">Java</div>
         </div>
         <div class="tech-item reveal stagger-2" role="listitem">
-          <div class="tech-icon" aria-label="React Native">📱</div>
+          <div class="tech-icon" aria-hidden="true">RN</div>
           <div class="tech-item-name">React Native</div>
         </div>
       </div>
@@ -2296,14 +2445,14 @@
 
       <div class="team-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 760px; margin-left: auto; margin-right: auto;">
         <div class="team-card reveal stagger-1">
-          <div class="team-avatar" aria-hidden="true">🧑‍💻</div>
+          <div class="team-avatar" aria-hidden="true">BB</div>
           <div class="team-name">Briano Bruno</div>
           <div class="team-role">Principal Architect</div>
           <p class="team-bio">Full-stack architect and systems thinker specializing in scalable platform design, cloud-native infrastructure, and translating complex business requirements into elegant, maintainable software solutions.</p>
         </div>
 
         <div class="team-card reveal stagger-2">
-          <div class="team-avatar" aria-hidden="true">👨‍💻</div>
+          <div class="team-avatar" aria-hidden="true">MK</div>
           <div class="team-name">Michael Kholodovsky</div>
           <div class="team-role">Principal Architect</div>
           <p class="team-bio">Distributed systems engineer with deep expertise in high-performance backends, data engineering pipelines, and AI integration — bringing rigorous engineering discipline to every engagement.</p>
@@ -2416,7 +2565,7 @@
               </div>
               <div>
                 <div class="contact-info-label">Phone</div>
-                <div class="contact-info-value">+1 (951) BKS-TECH (257-8324)</div>
+                <div class="contact-info-value"><a href="tel:+19512578324">+1 (951) 257-8324</a></div>
               </div>
             </div>
 
@@ -2437,11 +2586,11 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" placeholder="firstName" required autocomplete="given-name"/>
+                <input type="text" id="firstName" name="firstName" placeholder="Jane" required autocomplete="given-name"/>
               </div>
               <div class="form-group">
                 <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" placeholder="lastName" required autocomplete="family-name"/>
+                <input type="text" id="lastName" name="lastName" placeholder="Doe" required autocomplete="family-name"/>
               </div>
             </div>
 
@@ -2457,7 +2606,7 @@
 
             <div class="form-group">
               <label for="service">Service Interest</label>
-              <select id="service" name="service">
+              <select id="service" name="service" required>
                 <option value="" disabled selected>Select a service...</option>
                 <option value="architecture">System Architecture</option>
                 <option value="engineering">Full-Stack Engineering</option>
@@ -2472,8 +2621,11 @@
 
             <div class="form-group">
               <label for="message">Tell Us About Your Project</label>
-              <textarea id="message" name="message" placeholder="Describe your project, challenges, and goals..."></textarea>
+              <textarea id="message" name="message" placeholder="Describe your project, challenges, and goals..." required></textarea>
             </div>
+
+            <!-- Honeypot anti-spam field (Formspree) -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-10000px;width:1px;height:1px;opacity:0;" aria-hidden="true"/>
 
             <button type="submit" id="contactSubmitBtn" class="btn-primary" style="width: 100%; justify-content: center;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -2540,10 +2692,6 @@
       <div>
         <div class="footer-col-title">Connect</div>
         <ul class="footer-links">
-          <li><a href="#" rel="noopener">LinkedIn</a></li>
-          <li><a href="#" rel="noopener">GitHub</a></li>
-          <li><a href="#" rel="noopener">Twitter / X</a></li>
-          <li><a href="#" rel="noopener">Blog</a></li>
           <li><a href="mailto:contact@blueprintknowledgesystems.com">Email Us</a></li>
         </ul>
       </div>
@@ -2561,20 +2709,26 @@
   <script>
     'use strict';
 
+    // Accessibility: respect reduced-motion + coarse-pointer preferences
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
     // ── Cursor Glow ──────────────────────────────
     const cursorGlow = document.getElementById('cursorGlow');
-    let mouseX = -300, mouseY = -300;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    (function animateCursor() {
-      cursorGlow.style.left = mouseX + 'px';
-      cursorGlow.style.top  = mouseY + 'px';
-      requestAnimationFrame(animateCursor);
-    })();
+    if (cursorGlow && isFinePointer && !prefersReducedMotion) {
+      let mouseX = -300, mouseY = -300;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+      (function animateCursor() {
+        cursorGlow.style.left = mouseX + 'px';
+        cursorGlow.style.top  = mouseY + 'px';
+        requestAnimationFrame(animateCursor);
+      })();
+    } else if (cursorGlow) {
+      cursorGlow.style.display = 'none';
+    }
 
     // ── Scroll Progress Bar ───────────────────────
     const progressBar = document.getElementById('progressBar');
@@ -2657,7 +2811,7 @@
         if (entry.isIntersecting) {
           const el     = entry.target;
           const target = parseInt(el.getAttribute('data-count'), 10);
-          const suffix = target === 98 ? '%' : (target === 12 ? '+' : '+');
+          const suffix = el.getAttribute('data-suffix') || '';
           animateCounter(el, target, suffix);
           counterObserver.unobserve(el);
         }
@@ -2709,7 +2863,7 @@
     // ── Parallax on hero visual ───────────────────
     const heroVisual = document.querySelector('.hero-visual');
 
-    if (heroVisual && window.matchMedia('(min-width: 769px)').matches) {
+    if (heroVisual && !prefersReducedMotion && window.matchMedia('(min-width: 769px)').matches) {
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         heroVisual.style.transform = `translateY(${scrollY * 0.08}px)`;
@@ -2717,6 +2871,7 @@
     }
 
     // ── Service card tilt effect ──────────────────
+    if (!prefersReducedMotion && isFinePointer)
     document.querySelectorAll('.service-card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect   = card.getBoundingClientRect();
