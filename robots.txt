@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /demos/
 Allow: /
 
 Sitemap: https://blueprintknowledgesystems.com/sitemap.xml
