@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Resources, Forms & Title Fee Calculator — Rally Point Title</title>
-<meta name="description" content="Estimate title fees, download forms, and get the free Rally Point Home Buyer Checklist.">
+<title>Resources & Forms — Rally Point Title</title>
+<meta name="description" content="Download forms, get the free Rally Point Home Buyer Checklist, and request a quote.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,30..100;1,9..144,300..700,30..100&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -55,81 +55,32 @@
   <div class="container">
     <p class="crumbs"><a href="index.html">Home</a> / Resources</p>
     <span class="eyebrow">Tools &amp; downloads</span>
-    <h1>Estimate fees. Get forms. Stay organized.</h1>
-    <p class="lede">Title fee estimates, downloadable forms, and the Rally Point Home Buyer Checklist.</p>
+    <h1>Get a quote. Get forms. Stay organized.</h1>
+    <p class="lede">Request a title insurance quote, download forms, and grab the Rally Point Home Buyer Checklist.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="cards cards--2">
+    <div class="cards cards--3">
+      <article class="card" style="padding: 40px;">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Get a Quote</h3>
+        <p>Request a title insurance quote for your purchase or refinance. Powered by our secure Qualia closing portal.</p>
+        <a href="#" class="btn btn--primary get-qualia-quote" style="margin-top: 8px;">Get a Quote</a>
+      </article>
       <article class="card" style="padding: 40px;">
         <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
         <h3>Forms</h3>
-        <p>13 ready-to-use PDFs including the Title Insurance Order Form, NJ Standard Real Estate Contract, Affidavits of Consideration, FIRPTA, L-9, and more.</p>
+        <p>Ready-to-use PDFs including the Title Insurance Order Form, NJ Standard Real Estate Contract, Affidavits of Consideration, FIRPTA, L-9, and more.</p>
         <a href="forms.html" class="btn btn--primary" style="margin-top: 8px;">Browse Forms</a>
       </article>
       <article class="card" style="padding: 40px;">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h8M8 18h4"/></svg></div>
-        <h3>Title Fee Calculator</h3>
-        <p>Estimate owner&#39;s policy, lender&#39;s policy, settlement, search, and recording fees by state, in seconds.</p>
-        <a href="#calculator" class="btn btn--primary" style="margin-top: 8px;">Open Calculator</a>
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></div>
+        <h3>Home Buyer Checklist</h3>
+        <p>A printable, page-by-page guide through the home buying process — and connections to the service providers you&#39;ll need along the way.</p>
+        <a href="checklist.html" class="btn btn--primary" style="margin-top: 8px;">Get the Checklist</a>
       </article>
-    </div>
-  </div>
-</section>
-
-<section class="section section--alt" id="calculator">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Title Fee Calculator</span>
-      <h2>Estimate your closing costs in seconds.</h2>
-      <p>Enter your purchase price and we&#39;ll estimate the major title-side line items. Illustrative only — promulgated rates and recording fees vary by county.</p>
-    </div>
-
-    <div class="calculator" id="calc">
-      <div>
-        <div class="field">
-          <label for="calc-price">Purchase price</label>
-          <input id="calc-price" type="number" min="0" step="1000" value="500000">
-        </div>
-        <div class="field">
-          <label for="calc-loan">Loan amount</label>
-          <input id="calc-loan" type="number" min="0" step="1000" value="400000">
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="calc-state">State</label>
-            <select id="calc-state">
-              <option value="NJ">New Jersey</option>
-              <option value="NY">New York</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="FL">Florida</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="calc-type">Transaction type</label>
-            <select id="calc-type">
-              <option value="purchase">Purchase</option>
-              <option value="refi">Refinance</option>
-            </select>
-          </div>
-        </div>
-        <p style="font-size: 0.82rem; color: var(--ink-500); margin-top: 14px;">Looking for an exact quote? <a href="contact.html">Request one here</a> — we&#39;ll respond within one business day.</p>
-      </div>
-
-      <aside class="calc-result">
-        <h3>Estimated Total</h3>
-        <div class="calc-total" data-out="total">$0</div>
-        <ul class="calc-breakdown">
-          <li><span>Owner&#39;s policy</span><span data-out="owner">$0</span></li>
-          <li><span>Lender&#39;s policy</span><span data-out="lender">$0</span></li>
-          <li><span>Settlement fee</span><span data-out="settle">$0</span></li>
-          <li><span>Title search</span><span data-out="search">$0</span></li>
-          <li><span>Recording (est.)</span><span data-out="recording">$0</span></li>
-        </ul>
-        <p class="calc-disclaimer">This estimate is provided for planning purposes only and is not a quote. Actual fees vary by state, county, and underwriter.</p>
-      </aside>
     </div>
   </div>
 </section>
@@ -162,7 +113,6 @@
       <div class="footer-col"><h4>Resources</h4><ul>
         <li><a href="about.html">About Us</a></li>
         <li><a href="forms.html">Download Forms</a></li>
-        <li><a href="resources.html">Calculator</a></li>
         <li><a href="faqs.html">FAQs &amp; Videos</a></li>
         <li><a href="blogs.html">Blog</a></li>
         <li><a href="checklist.html">Home Buyer Checklist</a></li>

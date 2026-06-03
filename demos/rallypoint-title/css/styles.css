@@ -187,7 +187,7 @@ p + p { margin-top: var(--s-2); }
 button { font-family: inherit; cursor: pointer; }
 
 /* Tabular numerals for any element marked .tabular or stat numbers */
-.tabular, .stat-num, .calc-total {
+.tabular, .stat-num {
   font-feature-settings: "tnum", "lnum";
   font-variant-numeric: tabular-nums lining-nums;
 }
@@ -230,6 +230,32 @@ button { font-family: inherit; cursor: pointer; }
 .section-head--center { margin-inline: auto; text-align: center; }
 .section-head p { font-size: var(--fs-md); color: var(--text-muted); line-height: 1.55; }
 .section--dark .section-head p { color: var(--ink-200); }
+
+/* Empty-state placeholder for sections waiting on real data
+   (e.g. live blog feed, Google Reviews integration) */
+.empty-state {
+  max-width: 560px;
+  margin-inline: auto;
+  padding: var(--s-9) var(--s-7);
+  text-align: center;
+  background: var(--canvas);
+  border: 1px dashed var(--ink-200);
+  border-radius: var(--r-lg);
+  color: var(--text-muted);
+}
+.section--alt .empty-state { background: var(--bg); }
+.empty-state .empty-state-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bronze-600);
+  margin-bottom: var(--s-3);
+}
+.empty-state p { line-height: 1.6; margin-bottom: var(--s-5); }
+.empty-state p:last-of-type { margin-bottom: var(--s-6); }
+.empty-state .btn { margin-top: 0; }
 
 /* Editorial overline — used everywhere to set up brand tone */
 .eyebrow {
@@ -483,6 +509,7 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 0.88rem;
   font-feature-settings: "tnum";
   color: var(--ink-900);
+  white-space: nowrap;
 }
 .nav-phone svg { width: 14px; height: 14px; color: var(--accent); }
 
@@ -538,10 +565,11 @@ button { font-family: inherit; cursor: pointer; }
 .hero-grid {
   position: relative;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: clamp(40px, 6vw, 88px);
   align-items: center;
 }
+.hero-copy { min-width: 0; }
 
 .hero-trust {
   display: inline-flex;
@@ -643,9 +671,9 @@ button { font-family: inherit; cursor: pointer; }
   display: block;
   font-family: var(--font-serif);
   font-variation-settings: "opsz" 96;
-  font-size: clamp(1.875rem, 3vw, 2.5rem);
+  font-size: clamp(1.625rem, 2.4vw, 2rem);
   font-weight: 500;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
   color: var(--ink-900);
   line-height: 1;
   font-feature-settings: "tnum", "lnum";
@@ -664,19 +692,22 @@ button { font-family: inherit; cursor: pointer; }
   margin-top: var(--s-3);
 }
 
-/* Hero visual — closing-status card with a subtle floating motion */
-.hero-visual { position: relative; }
+/* Hero visual — closing-status card.
+   No 3D tilt: this is a YMYL agency (title/escrow) — calm > flashy. */
+.hero-visual {
+  position: relative;
+  min-width: 0;            /* allow grid item to shrink properly */
+  padding-top: var(--s-8); /* breathing room for the floating badge */
+}
 
 .hero-card {
   position: relative;
   background: var(--canvas);
+  border: 1px solid var(--border-soft);
   border-radius: var(--r-lg);
   padding: 32px;
   box-shadow: var(--shadow-lg);
-  transform: perspective(1400px) rotateY(-4deg) rotateX(3deg);
-  transition: transform var(--t-slow);
 }
-.hero-card:hover { transform: perspective(1400px) rotateY(-2deg) rotateX(1deg); }
 
 .hero-card-head {
   display: flex;
@@ -772,12 +803,15 @@ button { font-family: inherit; cursor: pointer; }
   margin-top: 2px;
 }
 
-/* Trust seal badge floating over card */
+/* Trust seal badge — bottom-right corner of the card.
+   Sits half outside the card and the card foot reserves room on the right
+   so the badge never overlaps copy. */
 .hero-badge {
   position: absolute;
   z-index: 2;
-  top: -20px; right: -20px;
-  width: 116px; height: 116px;
+  bottom: -30px;
+  right: -30px;
+  width: 96px; height: 96px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -786,21 +820,26 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--ink-950);
   font-family: var(--font-display);
   text-align: center;
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
+  font-size: 0.54rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   box-shadow: var(--shadow-bronze), inset 0 1px 0 rgba(255,255,255,0.35);
-  line-height: 1.4;
-  padding: 14px;
+  line-height: 1.35;
+  padding: 10px;
   border: 2px solid var(--canvas);
 }
 .hero-badge strong {
   display: block;
-  font-size: 1.45rem;
+  font-size: 1.1rem;
   letter-spacing: 0.02em;
   text-transform: none;
   font-weight: 700;
+  margin-top: 2px;
 }
+
+/* Reserve room on the right of the card foot so the badge never overlaps
+   the "Settlement Agent / Rally Point" copy. */
+.hero-card-foot { padding-right: 70px; }
 
 /* ==========================================================================
    Underwriter / credentials strip
@@ -827,22 +866,28 @@ button { font-family: inherit; cursor: pointer; }
 .trust-logos {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--s-9);
+  gap: var(--s-4) var(--s-6);
   align-items: center;
   flex: 1;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 .trust-logos span {
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--ink-700);
-  opacity: 0.6;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  transition: opacity var(--t);
+  padding: 7px 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-full);
+  background: var(--bg);
+  transition: border-color var(--t), color var(--t);
 }
-.trust-logos span:hover { opacity: 1; }
+.trust-logos span:hover {
+  border-color: var(--bronze-400);
+  color: var(--ink-900);
+}
 
 /* ==========================================================================
    Service cards
@@ -1233,7 +1278,22 @@ button { font-family: inherit; cursor: pointer; }
 }
 .cta-band h2 { color: white; margin: 0 0 8px; font-weight: 400; }
 .cta-band p { color: rgba(255,255,255,0.78); margin: 0; font-size: 1.05rem; }
-.cta-band .actions { display: flex; gap: var(--s-3); justify-content: flex-end; flex-wrap: wrap; position: relative; z-index: 1; }
+.cta-band .actions {
+  display: flex;
+  gap: var(--s-3);
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+.cta-band .btn--outline {
+  color: white;
+  border-color: rgba(255,255,255,0.28);
+}
+.cta-band .btn--outline:hover {
+  background: white; color: var(--red-900); border-color: white;
+}
 
 /* ==========================================================================
    Forms
@@ -1294,66 +1354,6 @@ button { font-family: inherit; cursor: pointer; }
 }
 .form-status.success { display: block; background: rgba(45,122,74,0.08); color: var(--success); border: 1px solid rgba(45,122,74,0.2); }
 .form-status.error   { display: block; background: rgba(178,58,58,0.08); color: var(--error); border: 1px solid rgba(178,58,58,0.2); }
-
-/* ==========================================================================
-   Calculator
-   ========================================================================== */
-.calculator {
-  background: var(--canvas);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-xl);
-  padding: clamp(28px, 4vw, 48px);
-  box-shadow: var(--shadow);
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: var(--s-9);
-  align-items: start;
-}
-.calc-result {
-  background: var(--ink-950);
-  color: white;
-  padding: 36px;
-  border-radius: var(--r-lg);
-  position: sticky;
-  top: 100px;
-  background-image: radial-gradient(circle at 90% 10%, rgba(184,153,94,0.20), transparent 60%);
-}
-.calc-result h3 {
-  color: white;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  margin-bottom: var(--s-4);
-  font-weight: 600;
-  color: var(--bronze-400);
-}
-.calc-total {
-  font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  color: white;
-  font-weight: 400;
-  line-height: 1;
-  margin-bottom: var(--s-7);
-  letter-spacing: -0.03em;
-  font-feature-settings: "tnum", "lnum";
-}
-.calc-breakdown { list-style: none; margin: 0; padding: 0; }
-.calc-breakdown li {
-  display: flex;
-  justify-content: space-between;
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.78);
-}
-.calc-breakdown li span:last-child { color: var(--bronze-400); font-weight: 600; font-feature-settings: "tnum"; }
-.calc-disclaimer {
-  margin-top: var(--s-5);
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.5;
-}
 
 /* ==========================================================================
    Page header (interior pages)
@@ -1440,6 +1440,15 @@ button { font-family: inherit; cursor: pointer; }
   font-weight: 700;
   margin-bottom: var(--s-6);
   border: 2px solid rgba(255,255,255,0.2);
+}
+.founder-photo {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  margin-bottom: var(--s-6);
+  border: 3px solid rgba(255,255,255,0.25);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 .founder-card h3 {
   color: white;
@@ -1534,6 +1543,56 @@ button { font-family: inherit; cursor: pointer; }
 .contact-block a:hover { color: var(--accent); }
 
 /* ==========================================================================
+   Visit-us card (contact page — used in lieu of an embedded map)
+   ========================================================================== */
+.visit-card {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  background: var(--canvas);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-xl);
+  padding: clamp(28px, 4vw, 48px);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.visit-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 0% 100%, rgba(122,20,20,0.05), transparent 45%),
+    radial-gradient(circle at 100% 0%, rgba(184,153,94,0.10), transparent 45%);
+  pointer-events: none;
+}
+.visit-card-marker {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, var(--red-700), var(--red-900));
+  color: var(--bronze-400);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-red);
+  position: relative;
+  z-index: 1;
+}
+.visit-card-marker svg { width: 56px; height: 56px; }
+.visit-card-body { position: relative; z-index: 1; }
+.visit-card-body h2 { font-size: clamp(1.5rem, 2.4vw, 2rem); margin-bottom: var(--s-3); }
+.visit-card-body p { color: var(--text-muted); max-width: 560px; margin-bottom: var(--s-5); }
+.visit-card-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+@media (max-width: 720px) {
+  .visit-card { grid-template-columns: 1fr; text-align: center; }
+  .visit-card-marker { margin-inline: auto; width: 96px; height: 96px; }
+  .visit-card-marker svg { width: 40px; height: 40px; }
+  .visit-card-body p { margin-inline: auto; }
+  .visit-card-actions { justify-content: center; }
+}
+
+/* ==========================================================================
    FAQ video grid
    ========================================================================== */
 .faq-videos {
@@ -1557,8 +1616,30 @@ button { font-family: inherit; cursor: pointer; }
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
-  background: var(--ink-950);
+  background:
+    linear-gradient(135deg, var(--ink-900), var(--ink-700));
+  overflow: hidden;
 }
+/* Soft play-glyph placeholder behind the iframe so the tile never reads
+   as a flat black rectangle if YouTube is slow or blocked. */
+.faq-video .frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(184,153,94,0.22), transparent 55%);
+}
+.faq-video .frame::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  margin: -12px 0 0 -6px;
+  border-style: solid;
+  border-width: 12px 0 12px 18px;
+  border-color: transparent transparent transparent rgba(255,255,255,0.45);
+}
+.faq-video iframe { position: relative; z-index: 1; }
 .faq-video iframe {
   position: absolute;
   inset: 0;
@@ -1686,16 +1767,44 @@ button { font-family: inherit; cursor: pointer; }
   transform: translateY(-2px);
 }
 .post-image {
-  background:
-    radial-gradient(ellipse at 30% 30%, var(--red-50), var(--bronze-50));
+  background: var(--paper-2);
   display: grid;
   place-items: center;
-  color: var(--accent);
+  color: var(--bronze-700);
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-right: 1px solid var(--border-soft);
+  position: relative;
+  overflow: hidden;
 }
+.post-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 100% 0%, rgba(184,153,94,0.18), transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(122,20,20,0.07), transparent 55%);
+  pointer-events: none;
+}
+.post-image > * { position: relative; z-index: 1; }
+.post-image--photo {
+  padding: 0;
+  background: var(--ink-100);
+  display: block;
+  text-decoration: none;
+}
+.post-image--photo::before { display: none; }
+.post-image--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--t);
+}
+.post:hover .post-image--photo img { transform: scale(1.03); }
 .post-body { padding: 28px 32px; }
 .post-meta {
   font-size: 0.74rem;
@@ -1833,9 +1942,18 @@ button { font-family: inherit; cursor: pointer; }
 /* ==========================================================================
    Responsive
    ========================================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 960px) {
   .hero-grid { grid-template-columns: 1fr; gap: var(--s-9); }
   .hero-visual { max-width: 480px; margin-inline: auto; }
+}
+
+@media (max-width: 1100px) {
+  /* Slightly tighten the nav so 8 items + phone + CTA all fit on one row */
+  .nav-menu a { padding: 8px 10px; font-size: 0.82rem; }
+  .nav { gap: var(--s-4); }
+}
+
+@media (max-width: 1024px) {
   .cards--4 { grid-template-columns: repeat(2, 1fr); }
   .cards--3 { grid-template-columns: repeat(2, 1fr); }
   .faq-videos { grid-template-columns: repeat(2, 1fr); }
@@ -1849,8 +1967,6 @@ button { font-family: inherit; cursor: pointer; }
   .about-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--s-7); }
   .contact-grid { grid-template-columns: 1fr; }
-  .calculator { grid-template-columns: 1fr; }
-  .calc-result { position: static; }
   .cta-band { grid-template-columns: 1fr; text-align: center; }
   .cta-band .actions { justify-content: center; }
   .values { grid-template-columns: 1fr; }
@@ -1865,16 +1981,15 @@ button { font-family: inherit; cursor: pointer; }
   .form-row { flex-direction: column; align-items: flex-start; padding: 18px; gap: 12px; }
   .form-row .download { align-self: stretch; justify-content: center; }
 
-  /* Hero — disable 3D transform on mobile to prevent overflow,
-     reposition badge inside card bounds */
-  .hero-card { transform: none; }
+  /* Hero — badge at bottom-right, smaller, pulled less far off-card */
   .hero-badge {
-    top: -16px; right: -8px;
-    width: 92px; height: 92px;
-    font-size: 0.55rem;
-    padding: 10px;
+    bottom: -18px; right: -8px;
+    width: 78px; height: 78px;
+    font-size: 0.5rem;
+    padding: 8px;
+    letter-spacing: 0.12em;
   }
-  .hero-badge strong { font-size: 1.15rem; }
+  .hero-badge strong { font-size: 0.9rem; }
 
   .hero h1 { line-height: 1.05; }
   .hero-grid { gap: var(--s-8); }
@@ -1919,7 +2034,6 @@ button { font-family: inherit; cursor: pointer; }
   .field-row { grid-template-columns: 1fr; }
   .audience-tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
   .audience-tab { white-space: nowrap; }
-  .calculator { padding: 24px; }
   .review-badge { flex-wrap: wrap; justify-content: center; }
   .review-badge .google { padding-left: 0; border-left: 0; }
 }

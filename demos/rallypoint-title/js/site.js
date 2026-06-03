@@ -87,49 +87,6 @@
     });
   });
 
-  /* ---------- Title fee calculator ---------- */
-  const calc = document.querySelector('#calc');
-  if (calc) {
-    const price = calc.querySelector('#calc-price');
-    const loan  = calc.querySelector('#calc-loan');
-    const state = calc.querySelector('#calc-state');
-    const type  = calc.querySelector('#calc-type');
-
-    const fmt = (n) => '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
-
-    function rateFor(s) {
-      switch (s) {
-        case 'NJ': return 4.75;
-        case 'NY': return 5.50;
-        case 'PA': return 5.25;
-        case 'FL': return 5.75;
-        default:   return 5.00;
-      }
-    }
-
-    function update() {
-      const p = Math.max(0, parseFloat(price.value) || 0);
-      const l = Math.max(0, parseFloat(loan.value)  || 0);
-      const rate = rateFor(state.value);
-      const owner = type.value !== 'refi' ? (p / 1000) * rate : 0;
-      const lender = (l / 1000) * (rate * 0.55);
-      const settle = 695;
-      const search = 285;
-      const recording = 175;
-      const total = owner + lender + settle + search + recording;
-
-      calc.querySelector('[data-out="owner"]').textContent     = fmt(owner);
-      calc.querySelector('[data-out="lender"]').textContent    = fmt(lender);
-      calc.querySelector('[data-out="settle"]').textContent    = fmt(settle);
-      calc.querySelector('[data-out="search"]').textContent    = fmt(search);
-      calc.querySelector('[data-out="recording"]').textContent = fmt(recording);
-      calc.querySelector('[data-out="total"]').textContent     = fmt(total);
-    }
-
-    [price, loan, state, type].forEach(el => el && el.addEventListener('input', update));
-    update();
-  }
-
   /* ---------- Reveal on scroll ---------- */
   const revealTargets = document.querySelectorAll('.card, .testimonial, .step, .value, .contact-block, .post, .form-row, .faq-video, [data-reveal]');
   revealTargets.forEach(el => el.setAttribute('data-reveal', ''));
