@@ -349,7 +349,7 @@
     <!-- Hero -->
     <section class="hero" id="hero" aria-label="Hero">
       <div>
-        <div class="hero-badge">Now booking websites for April &amp; May 2026</div>
+        <div class="hero-badge">Now booking websites for <span id="bookingMonths">April &amp; May 2026</span></div>
         <h1>Your business deserves a <span class="accent">real website.</span><br/>We'll build one in 2 weeks.</h1>
         <p class="lede">
           If your customers can't find you on Google, they can't hire you. Blueprint Local
@@ -648,6 +648,20 @@
 
   <script>
     'use strict';
+
+    (function setBookingMonths() {
+      const el = document.getElementById('bookingMonths');
+      if (!el) return;
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const now = new Date();
+      const current = now.getMonth();
+      const next = (current + 1) % 12;
+      const currentYear = now.getFullYear();
+      const nextYear = current === 11 ? currentYear + 1 : currentYear;
+      const yearLabel = currentYear === nextYear ? currentYear : `${currentYear}/${nextYear}`;
+      el.textContent = `${months[current]} & ${months[next]} ${yearLabel}`;
+    })();
+
     const FORMSPREE_URL = 'https://formspree.io/f/xvzwbzve';
 
     document.getElementById('localForm').addEventListener('submit', async function(e) {
